@@ -3,9 +3,6 @@ package io.zipcoder.interfaces;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TestPeople {
 
     @Test
@@ -92,5 +89,20 @@ public class TestPeople {
         people.removeAll();
         //Then
         Assert.assertEquals(0, people.personList.size());
+    }
+
+    @Test
+    public void testFindById() {
+        //Given
+        Person test1 = new Person(0, "Tessa");
+        Person test2 = new Person(1, "Todd");
+        People people = new People();
+        people.add(test1);
+        people.add(test2);
+        Person found;
+        //When
+        found = people.findById(0);
+        //Then
+        Assert.assertEquals(test1, found);
     }
 }

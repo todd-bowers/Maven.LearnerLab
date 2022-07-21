@@ -15,14 +15,10 @@ public class People {
     }
 
     public Person findById(long id) {
-        Person found = null;
-        for (Person person : this.personList) {
-            if (person.getId() == id) {
-                found = person;
-            }
-            else found = null;
+        for (int i = 0; i < this.count(); i++) {
+            if (this.personList.get(i).getId() == id) return this.personList.get(i);
         }
-        return found;
+        return null;
     }
 
     public boolean contains(Person person) {
