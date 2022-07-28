@@ -1,61 +1,58 @@
 package io.zipcoder.interfaces;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class People {
-    List<Person> personList = new ArrayList<>();
+public class People<T extends Person> implements Iterable<T> {
+    List<T> personList = new ArrayList<>();
 
-    public void People() {
-        List<Person> personList = new ArrayList<>();
+    public void add(T person) {
+        personList.add(person);
     }
 
-    public void add(Person person) {
-        this.personList.add(person);
-    }
-
-    public Person findById(long id) {
-        for (int i = 0; i < this.count(); i++) {
-            if (this.personList.get(i).getId() == id) return this.personList.get(i);
+    public T findById(long id) {
+        for (int i = 0; i < count(); i++) {
+            if (personList.get(i).getId() == id) return personList.get(i);
         }
         return null;
     }
 
-    public boolean contains(Person person) {
-        return this.personList.contains(person);
+    public boolean contains(T person) {
+        return personList.contains(person);
     }
 
-    public void remove(Person person) {
-        for (Person holder : this.personList) {
-            if (holder == person) {
-                this.personList.remove(holder);
-                break;
-            }
-        }
+    public void remove(T person) {
+        personList.remove(person);
     }
 
     public void remove(long id) {
-        for (Person holder : this.personList) {
+        for (T holder : personList) {
             if (holder.getId() == id) {
-                this.personList.remove(holder);
+                personList.remove(holder);
                 break;
             }
         }
     }
 
     public void removeAll() {
-        this.personList.clear();
+        personList.clear();
     }
 
     public int count() {
-        return this.personList.size();
+        return personList.size();
     }
 
     public Person[] toArray() {
-        Person[] personArray = new Person[this.count()];
-        for (int i = 0; i < this.count(); i++) {
-            personArray[i] = this.personList.get(i);
+        Person[] personArray = new Person[count()];
+        for (int i = 0; i < count(); i++) {
+            personArray[i] = personList.get(i);
         }
         return personArray;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return personList.iterator();
     }
 }
